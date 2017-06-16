@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--Project was exported from assembly: C:\Users\devadmin\.nuget\packages\Sitecore.Commerce.Plugin.Fulfillment\1.0.2108\lib\net452\Sitecore.Commerce.Plugin.Fulfillment.dll-->
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7062AC07-714A-464D-8311-EA1C8BCC0269}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AssemblyName>Sitecore.Commerce.Plugin.Fulfillment</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <ApplicationVersion>1.0.0.0</ApplicationVersion>
+    <FileAlignment>512</FileAlignment>
+    <RootNamespace>Sitecore.Commerce.Plugin.Fulfillment</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Sitecore.Framework.Pipelines.Common" />
+    <Reference Include="Sitecore.Framework.Pipelines.Abstractions" />
+    <Reference Include="Microsoft.AspNetCore.OData" />
+    <Reference Include="Sitecore.Commerce.Core" />
+    <Reference Include="Sitecore.Framework.Configuration.Abstractions" />
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+    <Reference Include="Sitecore.Commerce.Plugin.Orders" />
+    <Reference Include="Sitecore.Commerce.Plugin.Views" />
+    <Reference Include="Sitecore.Framework.Pipelines" />
+    <Reference Include="Sitecore.Commerce.Plugin.Carts" />
+    <Reference Include="Microsoft.AspNetCore.Mvc.Core" />
+    <Reference Include="Microsoft.AspNetCore.Mvc.Abstractions" />
+    <Reference Include="System.Web.Http.OData" />
+    <Reference Include="Newtonsoft.Json" />
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions" />
+    <Reference Include="Sitecore.Commerce.Plugin.Pricing" />
+    <Reference Include="Sitecore.Commerce.Plugin.ManagedLists" />
+    <Reference Include="Sitecore.Framework.Rules.Abstractions" />
+    <Reference Include="System" />
+    <Reference Include="Sitecore.Framework.Conditions" />
+    <Reference Include="Sitecore.Framework.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="Sitecore.Commerce.Plugin.Availability" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ConfigureServiceApiBlock.cs" />
+    <Compile Include="ConfigureSitecore.cs" />
+    <Compile Include="FulfillmentConstants.cs" />
+    <Compile Include="GetFulfillmentMethodsCommand.cs" />
+    <Compile Include="GetFulfillmentOptionsCommand.cs" />
+    <Compile Include="SetCartFulfillmentCommand.cs" />
+    <Compile Include="SetCartLinesFulfillmentCommand.cs" />
+    <Compile Include="UpdateCartShippingAddressCommand.cs" />
+    <Compile Include="ElectronicFulfillmentComponent.cs" />
+    <Compile Include="FulfillmentComponent.cs" />
+    <Compile Include="PhysicalFulfillmentComponent.cs" />
+    <Compile Include="ShippingCostComponent.cs" />
+    <Compile Include="SplitFulfillmentComponent.cs" />
+    <Compile Include="CommandsController.cs" />
+    <Compile Include="FulfillmentMethodsController.cs" />
+    <Compile Include="FulfillmentOptionsController.cs" />
+    <Compile Include="ShipmentsController.cs" />
+    <Compile Include="FulfillmentComponentConverter.cs" />
+    <Compile Include="FulfillmentMethod.cs" />
+    <Compile Include="FulfillmentOption.cs" />
+    <Compile Include="ProductFulfillmentOptions.cs" />
+    <Compile Include="Shipment.cs" />
+    <Compile Include="FulfillmentFee.cs" />
+    <Compile Include="GetCartFulfillmentMethodsPipeline.cs" />
+    <Compile Include="GetCartFulfillmentOptionsPipeline.cs" />
+    <Compile Include="GetCartLineFulfillmentMethodsPipeline.cs" />
+    <Compile Include="GetCartLineFulfillmentOptionsPipeline.cs" />
+    <Compile Include="GetFulfillmentFromViewPipeline.cs" />
+    <Compile Include="GetFulfillmentMethodsPipeline.cs" />
+    <Compile Include="GetFulfillmentOptionsPipeline.cs" />
+    <Compile Include="IGetCartFulfillmentMethodsPipeline.cs" />
+    <Compile Include="IGetCartFulfillmentOptionsPipeline.cs" />
+    <Compile Include="IGetCartLineFulfillmentMethodsPipeline.cs" />
+    <Compile Include="IGetCartLineFulfillmentOptionsPipeline.cs" />
+    <Compile Include="IGetFulfillmentFromViewPipeline.cs" />
+    <Compile Include="IGetFulfillmentMethodsPipeline.cs" />
+    <Compile Include="IGetFulfillmentOptionsPipeline.cs" />
+    <Compile Include="ISelectFulfillmentOptionPipeline.cs" />
+    <Compile Include="ISetCartFulfillmentPipeline.cs" />
+    <Compile Include="ISetCartLinesFulfillmentPipeline.cs" />
+    <Compile Include="IUpdateCartShippingAddressPipeline.cs" />
+    <Compile Include="SelectFulfillmentOptionPipeline.cs" />
+    <Compile Include="SetCartFulfillmentPipeline.cs" />
+    <Compile Include="SetCartLinesFulfillmentPipeline.cs" />
+    <Compile Include="UpdateCartShippingPartyPipeline.cs" />
+    <Compile Include="CartFulfillmentArgument.cs" />
+    <Compile Include="CartFulfillmentsArgument.cs" />
+    <Compile Include="CartLinePartyArgument.cs" />
+    <Compile Include="CartPartyArgument.cs" />
+    <Compile Include="FulfillmentOptionAndViewArgument.cs" />
+    <Compile Include="CalculateCartFulfillmentBlock.cs" />
+    <Compile Include="CalculateCartLinesFulfillmentBlock.cs" />
+    <Compile Include="FilterCartFulfillmentMethodsBlock.cs" />
+    <Compile Include="FilterCartFulfillmentOptionsBlock.cs" />
+    <Compile Include="FilterCartLineFulfillmentMethodsBlock.cs" />
+    <Compile Include="FilterCartLineFulfillmentOptionsBlock.cs" />
+    <Compile Include="GenerateOrderLinesShipmentBlock.cs" />
+    <Compile Include="GenerateOrderShipmentBlock.cs" />
+    <Compile Include="GetFulfillmentMethodsBlock.cs" />
+    <Compile Include="GetFulfillmentOptionsBlock.cs" />
+    <Compile Include="NodeHeartBeatMinionBlock.cs" />
+    <Compile Include="RegisteredPluginBlock.cs" />
+    <Compile Include="SetCartFulfillmentBlock.cs" />
+    <Compile Include="SetCartLinesFulfillmentBlock.cs" />
+    <Compile Include="UpdateCartShippingPartyBlock.cs" />
+    <Compile Include="UpdateFulfillmentsOnHoldOrderBlock.cs" />
+    <Compile Include="ValidateCartFulfillmentBlock.cs" />
+    <Compile Include="ValidateCartFulfillmentPartyBlock.cs" />
+    <Compile Include="ValidateCartHasFulfillmentBlock.cs" />
+    <Compile Include="ValidateCartLinesFulfillmentBlock.cs" />
+    <Compile Include="ValidateCartLinesFulfillmentPartiesBlock.cs" />
+    <Compile Include="DoActionGetCountryRegionsBlock.cs" />
+    <Compile Include="DoActionGetFulfillmentMethodsBlock.cs" />
+    <Compile Include="DoActionSelectFulfillmentOptionBlock.cs" />
+    <Compile Include="DoActionSetFulfillmentBlock.cs" />
+    <Compile Include="GetDigitalFulfillmentFromViewBlock.cs" />
+    <Compile Include="GetFulfillmentFromViewBlock.cs" />
+    <Compile Include="GetPhysicalFulfillmentFromViewBlock.cs" />
+    <Compile Include="SelectDigitalFulfillmentOptionBlock.cs" />
+    <Compile Include="SelectFulfillmentOptionBlock.cs" />
+    <Compile Include="SelectShipToMeFulfillmentOptionBlock.cs" />
+    <Compile Include="SelectSplitFulfillmentOptionBlock.cs" />
+    <Compile Include="GetOrderFulfillmentDetailsViewBlock.cs" />
+    <Compile Include="GetOrderFulfillmentDetailsViewForSelectBlock.cs" />
+    <Compile Include="GetOrderFulfillmentsViewBlock.cs" />
+    <Compile Include="GetOrderShipmentsEntityViewBlock.cs" />
+    <Compile Include="PopulateOrderFulfillmentViewActionsBlock.cs" />
+    <Compile Include="DeliveryInStorePickupPolicy.cs" />
+    <Compile Include="GlobalPhysicalFulfillmentPolicy.cs" />
+    <Compile Include="KnownFulfillmentActionsPolicy.cs" />
+    <Compile Include="KnownFulfillmentListsPolicy.cs" />
+    <Compile Include="KnownFulfillmentViewsPolicy.cs" />
+    <Compile Include="ShippingPolicy.cs" />
+    <Compile Include="IFulfillmentCondition.cs" />
+    <Compile Include="CartFreeShippingAction.cs" />
+    <Compile Include="CartHasFulfillmentCondition.cs" />
+    <Compile Include="CartHasFulfillmentCountryCondition.cs" />
+    <Compile Include="CartHasFulfillmentMethodCondition.cs" />
+    <Compile Include="CartHasFulfillmentOptionCondition.cs" />
+    <Compile Include="CartHasFulfillmentPostalCodeCondition.cs" />
+    <Compile Include="CartHasFulfillmentRegionCondition.cs" />
+    <Compile Include="CartLineHasFulfillmentMethodCondition.cs" />
+    <Compile Include="CartLineHasFulfillmentOptionCondition.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
