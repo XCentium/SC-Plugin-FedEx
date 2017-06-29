@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using Plugin.Xcentium.Shipping.Fedex.Pipelines.Blocks;
 using Sitecore.Commerce.Core;
@@ -6,6 +7,8 @@ using Sitecore.Commerce.Plugin.Carts;
 using Sitecore.Commerce.Plugin.Fulfillment;
 using Sitecore.Framework.Configuration;
 using Sitecore.Framework.Pipelines.Definitions.Extensions;
+using Sitecore.Framework.Pipelines;
+
 
 namespace Plugin.Xcentium.Shipping.Fedex
 {
@@ -20,22 +23,19 @@ namespace Plugin.Xcentium.Shipping.Fedex
         {
             var assembly = Assembly.GetExecutingAssembly();
             services.RegisterAllPipelineBlocks(assembly);
-            services.Sitecore().Pipelines(config => config
-                .ConfigurePipeline<IBootstrapPipeline>(d =>
-                {
-                    d.Add<ChangeFulfillmentOptionsBlock>();
-                })
-                .ConfigurePipeline<ICalculateCartLinesPipeline>(d =>
-                {
-                    d.Add<UpdateCartLinesFulfillmentChargeBlock>().After<CalculateCartLinesFulfillmentBlock>();
-                })
-                .ConfigurePipeline<ICalculateCartPipeline>(d =>
-                {
-                    d.Add<UpdateCartFulfillmentChargeBlock>().After<CalculateCartFulfillmentBlock>();
-                })
-            );
 
-            services.RegisterAllCommands(assembly);
+            Action<SitecorePipelinesConfigBuilder> actionDelegate = c => c
+                    // Add the plugin code block so that it runs when the site is bootstrapped
+                    .ConfigurePipeline<IBootstrapPipeline>(d => { d.Add<ChangeFulfillmentOptionsBlock>(); })
+                    // This is how you can add the code block to run after a known code block has a modified the input. Same applies to Before
+                    .ConfigurePipeline<ICalculateCartLinesPipeline>(
+                        d =>
+                        {
+                            d.Add<UpdateCartLinesFulfillmentChargeBlock>().After<CalculateCartLinesFulfillmentBlock>();
+                        })
+                    .ConfigurePipeline<ICalculateCartPipeline>(
+                        d => { d.Add<UpdateCartFulfillmentChargeBlock>().After<CalculateCartFulfillmentBlock>(); });
+            services.Sitecore().Pipelines(actionDelegate);
 
         }
     }

@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Services.Protocols;
-using Plugin.Xcentium.Shipping.Fedex.Policies;
 using RateAvailableServiceWebServiceClient.RateServiceWebReference;
-using Sitecore.Commerce.Core;
 
 namespace Plugin.Xcentium.Shipping.Fedex.Fedex
 {
@@ -22,11 +20,11 @@ namespace Plugin.Xcentium.Shipping.Fedex.Fedex
         /// 
         /// </summary>
         /// <param name="input"></param>
-        /// <param name="context"></param>
+        /// <param name="fedExClientPolicy"></param>
         /// <returns></returns>
-        internal static List<KeyValuePair<string, decimal>> GetShippingRates(FedexReqestInput input, CommercePipelineExecutionContext context)
+        internal static List<KeyValuePair<string, decimal>> GetShippingRates(FedexReqestInput input, FedExClientPolicy fedExClientPolicy)
         {
-            FedExClientPolicy = context.GetPolicy<FedExClientPolicy>();
+            FedExClientPolicy = fedExClientPolicy;
 
             var request = CreateRateRequest(input);
 

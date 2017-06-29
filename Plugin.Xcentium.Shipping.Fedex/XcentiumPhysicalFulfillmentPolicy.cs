@@ -5,9 +5,14 @@ using Sitecore.Commerce.Plugin.Fulfillment;
 
 namespace Plugin.Xcentium.Shipping.Fedex
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class XcentiumPhysicalFulfillmentPolicy : Policy
     {
-
+        /// <summary>
+        /// 
+        /// </summary>
         public Decimal MaxShippingWeight { get; set; }
 
         /// <summary>Gets or sets the measurement units.</summary>

@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Plugin.Xcentium.Shipping.Fedex.Fedex;
 using Sitecore.Commerce.Core;
 using Sitecore.Commerce.Plugin.Carts;
-using Sitecore.Commerce.Plugin.Catalog;
+using Sitecore.Commerce.Plugin.Catalog.Cs;
 using Sitecore.Commerce.Plugin.Fulfillment;
 using Sitecore.Framework.Pipelines;
 
@@ -17,15 +17,15 @@ namespace Plugin.Xcentium.Shipping.Fedex.Pipelines.Blocks
         /// <summary>
         /// 
         /// </summary>
-        private readonly IGetSellableItemPipeline _getSellableItemPipeline;
+        private readonly GetProductCommand _getProductCommand;
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="getSellableItemPipeline"></param>
-        public UpdateCartLinesFulfillmentChargeBlock(IGetSellableItemPipeline getSellableItemPipeline)
+        /// <param name="getProductCommand"></param>
+        public UpdateCartLinesFulfillmentChargeBlock(GetProductCommand getProductCommand)
         {
-            _getSellableItemPipeline = getSellableItemPipeline;
+            _getProductCommand = getProductCommand;
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Plugin.Xcentium.Shipping.Fedex.Pipelines.Blocks
 
             var postageSelection = fulfillmentComponent.FulfillmentMethod.Name;
 
-            var postalPrice = FedexShipping.GetCartShippingRate(postageSelection, arg, _getSellableItemPipeline, context);
+            var postalPrice = FedexShipping.GetCartShippingRate(postageSelection, arg, _getProductCommand, context);
 
             var currency = context.CommerceContext.CurrentCurrency();
                

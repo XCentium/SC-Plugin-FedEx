@@ -52,10 +52,10 @@ namespace Plugin.Xcentium.Shipping.Fedex.Pipelines.Blocks
                 WeightUnits = "Lbs",
                 DefaultCartFulfillmentFee = new Money("USD", 14M),
                 DefaultCartFulfillmentFees =
-                    new List<Money>() {new Money("USD", 24M), new Money("CAD", 24M)},
+                    new List<Money>() { new Money("USD", 24M), new Money("CAD", 24M) },
                 DefaultItemFulfillmentFee = new Money("USD", 34M),
                 DefaultItemFulfillmentFees =
-                    new List<Money>() {new Money("USD", 44M), new Money("CAD", 44M)},
+                    new List<Money>() { new Money("USD", 44M), new Money("CAD", 44M) },
                 FulfillmentFees =
                     new List<FulfillmentFee>
                     {
@@ -125,10 +125,10 @@ namespace Plugin.Xcentium.Shipping.Fedex.Pipelines.Blocks
                     }
 
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
 
-                    throw;
+                    context.Logger.LogError($"Exception in ChangeFulfillmentOptionsBlock - {ex}");
                 }
             }
 
@@ -139,7 +139,6 @@ namespace Plugin.Xcentium.Shipping.Fedex.Pipelines.Blocks
             catch (System.Exception ex)
             {
                 context.Logger.LogError($"Exception in ChangeFulfillmentOptionsBlock - {ex}");
-                throw;
             }
 
             return Task.FromResult(arg);

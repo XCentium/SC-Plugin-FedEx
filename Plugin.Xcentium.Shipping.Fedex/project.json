@@ -19,8 +19,11 @@
   },
   "copyright": "Â 2017 Xcentium. All rights reserved.",
   "dependencies": {
+    "Microsoft.AspNetCore.Mvc": "1.0.1",
     "Sitecore.Commerce.Plugin.Fulfillment": "1.0.2301",
-    "Sitecore.Commerce.Plugin.CsAgent": "1.0.2301"
+    "Sitecore.Commerce.Plugin.CsAgent": "1.0.2301",
+    "Sitecore.Commerce.Plugin.Management": "1.0.2301",
+    "Sitecore.Commerce.Plugin.Catalog.Cs": "1.0.2301"
   },
   "description": "A Sample Xcentium Fulfillment Plugin.",
   "frameworks": {

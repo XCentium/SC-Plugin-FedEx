@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Services.Protocols;
-using Plugin.Xcentium.Shipping.Fedex.Policies;
 using RateWebServiceClient.RateServiceWebReference;
-using Sitecore.Commerce.Core;
 using Money = RateWebServiceClient.RateServiceWebReference.Money;
 
 namespace Plugin.Xcentium.Shipping.Fedex.Fedex
@@ -18,15 +16,16 @@ namespace Plugin.Xcentium.Shipping.Fedex.Fedex
         /// </summary>
         public static FedExClientPolicy FedExClientPolicy = new FedExClientPolicy();
 
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="input"></param>
-        /// <param name="context"></param>
+        /// <param name="fedExClientPolicy"></param>
         /// <returns></returns>
-        internal static List<KeyValuePair<string, decimal>> GetShippingRates(FedexReqestInput input, CommercePipelineExecutionContext context)
+        internal static List<KeyValuePair<string, decimal>> GetShippingRates(FedexReqestInput input, FedExClientPolicy fedExClientPolicy)
         {
-            FedExClientPolicy = context.GetPolicy<FedExClientPolicy>();
+            FedExClientPolicy = fedExClientPolicy;
 
             var request = CreateRateRequest(input);
 
@@ -213,7 +212,7 @@ namespace Plugin.Xcentium.Shipping.Fedex.Fedex
             // Insurance
             request.RequestedShipment.RequestedPackageLineItems[0].InsuredValue = new Money
             {
-                Amount = input.PriceValue * 2,
+                Amount = input.PriceValue * FedExClientPolicy.CompensationMultipier,
                 Currency = "USD"
             };
         }

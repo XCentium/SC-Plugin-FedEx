@@ -1,10 +1,12 @@
---temp-output:C:\CTPSDK - Copy\SC-Plugin-FedEx\Plugin.Xcentium.Shipping.Fedex\obj\Debug\net452\
---out:C:\CTPSDK - Copy\SC-Plugin-FedEx\Plugin.Xcentium.Shipping.Fedex\bin\Debug\net452\Plugin.Xcentium.Shipping.Fedex.dll
+--temp-output:C:\CTPSDK - Copy\SC-Plugin-FedEx\Plugin.Xcentium.Shipping.Fedex\obj\Release\net452\
+--out:C:\CTPSDK - Copy\SC-Plugin-FedEx\Plugin.Xcentium.Shipping.Fedex\bin\Release\net452\Plugin.Xcentium.Shipping.Fedex.dll
 --define:NET452
 --suppress-warning:CS1701
 --suppress-warning:CS1702
 --suppress-warning:CS1705
 --warnings-as-errors:True
+--optimize:True
+--generate-xml-documentation:True
 --output-name:Plugin.Xcentium.Shipping.Fedex
 --description:A Sample Xcentium Fulfillment Plugin.
 --copyright:Â 2017 Xcentium. All rights reserved.
@@ -215,7 +217,6 @@
 --reference:C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\Facades\System.Diagnostics.Tracing.dll
 --reference:C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\Facades\System.Reflection.Primitives.dll
 C:\CTPSDK - Copy\SC-Plugin-FedEx\Plugin.Xcentium.Shipping.Fedex\ConfigureSitecore.cs
-C:\CTPSDK - Copy\SC-Plugin-FedEx\Plugin.Xcentium.Shipping.Fedex\FedExClientPolicy.cs
 C:\CTPSDK - Copy\SC-Plugin-FedEx\Plugin.Xcentium.Shipping.Fedex\XcentiumPhysicalFulfillmentPolicy.cs
 C:\CTPSDK - Copy\SC-Plugin-FedEx\Plugin.Xcentium.Shipping.Fedex\Fedex\FedexFulfillmentMethod.cs
 C:\CTPSDK - Copy\SC-Plugin-FedEx\Plugin.Xcentium.Shipping.Fedex\Fedex\FedExInternational.cs
@@ -227,5 +228,6 @@ C:\CTPSDK - Copy\SC-Plugin-FedEx\Plugin.Xcentium.Shipping.Fedex\Fedex\Web Refere
 C:\CTPSDK - Copy\SC-Plugin-FedEx\Plugin.Xcentium.Shipping.Fedex\Pipelines\Blocks\ChangeFulfillmentOptionsBlock.cs
 C:\CTPSDK - Copy\SC-Plugin-FedEx\Plugin.Xcentium.Shipping.Fedex\Pipelines\Blocks\UpdateCartFulfillmentChargeBlock.cs
 C:\CTPSDK - Copy\SC-Plugin-FedEx\Plugin.Xcentium.Shipping.Fedex\Pipelines\Blocks\UpdateCartLinesFulfillmentChargeBlock.cs
+C:\CTPSDK - Copy\SC-Plugin-FedEx\Plugin.Xcentium.Shipping.Fedex\Policies\FedExClientPolicy.cs
 C:\CTPSDK - Copy\SC-Plugin-FedEx\Plugin.Xcentium.Shipping.Fedex\Properties\AssemblyInfo.cs
 C:\CTPSDK - Copy\SC-Plugin-FedEx\Plugin.Xcentium.Shipping.Fedex\Properties\Settings.Designer.cs

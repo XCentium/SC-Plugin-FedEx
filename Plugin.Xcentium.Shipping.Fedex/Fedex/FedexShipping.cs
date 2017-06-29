@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
-using CommerceServer.Core.Catalog;
-using Plugin.Xcentium.Shipping.Fedex.Policies;
 using Sitecore.Commerce.Core;
 using Sitecore.Commerce.Plugin.Carts;
 using Sitecore.Commerce.Plugin.Catalog;
+using Sitecore.Commerce.Plugin.Catalog.Cs;
 using Sitecore.Commerce.Plugin.Fulfillment;
 
 namespace Plugin.Xcentium.Shipping.Fedex.Fedex
@@ -29,14 +28,33 @@ namespace Plugin.Xcentium.Shipping.Fedex.Fedex
         /// </summary>
         /// <param name="name"></param>
         /// <param name="cart"></param>
-        /// <param name="getSellableItemPipeline"></param>
+        /// <param name="getProductCommand"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        internal static decimal GetCartShippingRate(string name, Cart cart, IGetSellableItemPipeline getSellableItemPipeline, CommercePipelineExecutionContext context)
+        internal static decimal GetCartShippingRate(string name, Cart cart, GetProductCommand getProductCommand, CommercePipelineExecutionContext context)
         {
  
+             var rates = GetCartShippingRates(cart, getProductCommand, context.GetPolicy<FedExClientPolicy>(), context.CommerceContext);
+
+            if (rates == null || !rates.Any()) return 0m;
+            try
+            {
+                return rates.FirstOrDefault(x => x.Key == name.ToLower()).Value;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+            return 0m;
+        }
+
+
+        internal static List<KeyValuePair<string, decimal>> GetCartShippingRates(Cart cart,
+             GetProductCommand getProductCommand, FedExClientPolicy fedExClientPolicy, CommerceContext commerceContext)
+        {
             var input = new FedexReqestInput();
-            FedExClientPolicy = context.GetPolicy<FedExClientPolicy>();
+            FedExClientPolicy = fedExClientPolicy;
             if (cart != null && cart.Lines.Any<CartLineComponent>() && cart.HasComponent<PhysicalFulfillmentComponent>())
             {
                 var component = cart.GetComponent<PhysicalFulfillmentComponent>();
@@ -50,7 +68,7 @@ namespace Plugin.Xcentium.Shipping.Fedex.Fedex
                 input.StateCode = shippingParty.StateCode;
                 input.ZipPostalCode = shippingParty.ZipPostalCode;
 
-                input.PriceValue = cart.Totals.GrandTotal.Amount;
+                input.PriceValue = cart.Totals.SubTotal.Amount;
 
                 decimal height = 0.0M;
                 decimal width = 0.0M;
@@ -63,31 +81,32 @@ namespace Plugin.Xcentium.Shipping.Fedex.Fedex
                     // get specific weight value
                     var productArgument = ProductArgument.FromItemId(cartLineComponent.ItemId);
                     if (!productArgument.IsValid()) continue;
-                    var sellableItem = getSellableItemPipeline.Run(productArgument, context).Result;
-                    var product = context.CommerceContext.Objects.OfType<Product>().FirstOrDefault<Product>((Product p) => p.ProductId.Equals(sellableItem.FriendlyId, StringComparison.OrdinalIgnoreCase));
+    
+                    var product = getProductCommand.Process(commerceContext, productArgument.CatalogName, productArgument.ProductId).Result;
+
                     decimal val = 0m;
                     if (product != null)
                     {
-                        if (product.HasProperty("Weight") && product["Weight"].ToString().Trim() != "")
-                            val = GetFirstDecimalFromString(product["Weight"].ToString());
+                        if (product.HasProperty(FedExClientPolicy.WeightFieldName) && product[FedExClientPolicy.WeightFieldName].ToString().Trim() != "")
+                            val = GetFirstDecimalFromString(product[FedExClientPolicy.WeightFieldName].ToString());
                         else val = GetFirstDecimalFromString(FedExClientPolicy.Weight);
 
                         if (val > 0) weight += val;
 
-                        val = product.HasProperty("Height") && product["height"].ToString().Trim() != ""
-                            ? GetFirstDecimalFromString(product["Height"].ToString())
+                        val = product.HasProperty(FedExClientPolicy.HeightFieldName) && product[FedExClientPolicy.HeightFieldName].ToString().Trim() != ""
+                            ? GetFirstDecimalFromString(product[FedExClientPolicy.HeightFieldName].ToString())
                             : GetFirstDecimalFromString(FedExClientPolicy.Height);
 
                         if (val > 0) height += val;
 
-                        val = product.HasProperty("Width") && product["Width"].ToString().Trim() != ""
-                            ? GetFirstDecimalFromString(product["Width"].ToString())
+                        val = product.HasProperty(FedExClientPolicy.WidthFieldName) && product[FedExClientPolicy.WidthFieldName].ToString().Trim() != ""
+                            ? GetFirstDecimalFromString(product[FedExClientPolicy.WidthFieldName].ToString())
                             : GetFirstDecimalFromString(FedExClientPolicy.Width);
 
                         if (val > 0 && val > width) width = val;
 
-                        val = product.HasProperty("Length") && product["Length"].ToString().Trim() != ""
-                            ? GetFirstDecimalFromString(product["Length"].ToString())
+                        val = product.HasProperty(FedExClientPolicy.LengthFieldName) && product[FedExClientPolicy.LengthFieldName].ToString().Trim() != ""
+                            ? GetFirstDecimalFromString(product[FedExClientPolicy.LengthFieldName].ToString())
                             : GetFirstDecimalFromString(FedExClientPolicy.Length);
 
                         if (val > 0 && val > length) length = val;
@@ -96,36 +115,26 @@ namespace Plugin.Xcentium.Shipping.Fedex.Fedex
 
                 }
 
-                input.Height = Math.Round(height, 0).ToString(CultureInfo.CurrentCulture);
-                input.Width = Math.Round(width, 0).ToString(CultureInfo.CurrentCulture);
-                input.Length = Math.Round(length, 0).ToString(CultureInfo.CurrentCulture);
-                input.Weight = weight;
+                input.Height = Math.Ceiling(height).ToString(CultureInfo.CurrentCulture);
+                input.Width = Math.Ceiling(width).ToString(CultureInfo.CurrentCulture);
+                input.Length = Math.Ceiling(length).ToString(CultureInfo.CurrentCulture);
+                input.Weight = Math.Ceiling(weight);
 
             }
 
-            var rates = new List<KeyValuePair<string,decimal>>();
+            var rates = new List<KeyValuePair<string, decimal>>();
 
             if (input.CountryCode.ToLower() == "us")
             {
-                rates = FedxUs.GetShippingRates(input, context);
+                rates = FedxUs.GetShippingRates(input, FedExClientPolicy);
             }
             else
             {
-                rates = FedExInternational.GetShippingRates(input, context);
-            }
-             
-
-            if (rates == null || !rates.Any()) return 0m;
-            try
-            {
-                return rates.FirstOrDefault(x => x.Key == name.ToLower()).Value;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
+                rates = FedExInternational.GetShippingRates(input, FedExClientPolicy);
             }
 
-            return 0m;
+
+            return rates;
         }
 
         /// <summary>
@@ -144,5 +153,7 @@ namespace Plugin.Xcentium.Shipping.Fedex.Fedex
             decimal.TryParse(decimalVal, out decimalResult);
             return decimalResult;
         }
+
+
     }
 }

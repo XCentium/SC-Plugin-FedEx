@@ -3,12 +3,14 @@
 -nowarn:CS1702
 -nowarn:CS1705
 -warnaserror
+-optimize
+-doc:"C:\CTPSDK - Copy\SC-Plugin-FedEx\Plugin.Xcentium.Shipping.Fedex\bin\Release\net452\Plugin.Xcentium.Shipping.Fedex.xml"
 -t:library
 -debug:full
 -nostdlib
 -nologo
-"C:\CTPSDK - Copy\SC-Plugin-FedEx\Plugin.Xcentium.Shipping.Fedex\obj\Debug\net452\dotnet-compile.assemblyinfo.cs"
--out:"C:\CTPSDK - Copy\SC-Plugin-FedEx\Plugin.Xcentium.Shipping.Fedex\bin\Debug\net452\Plugin.Xcentium.Shipping.Fedex.dll"
+"C:\CTPSDK - Copy\SC-Plugin-FedEx\Plugin.Xcentium.Shipping.Fedex\obj\Release\net452\dotnet-compile.assemblyinfo.cs"
+-out:"C:\CTPSDK - Copy\SC-Plugin-FedEx\Plugin.Xcentium.Shipping.Fedex\bin\Release\net452\Plugin.Xcentium.Shipping.Fedex.dll"
 -r:"C:\Users\Ola.Owolawo\.nuget\packages\Microsoft.ApplicationInsights\2.1.0\lib\net45\Microsoft.ApplicationInsights.dll"
 -r:"C:\Users\Ola.Owolawo\.nuget\packages\Microsoft.ApplicationInsights.Agent.Intercept\1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll"
 -r:"C:\Users\Ola.Owolawo\.nuget\packages\Microsoft.ApplicationInsights.AspNetCore\1.0.2\lib\net451\Microsoft.ApplicationInsights.AspNetCore.dll"
@@ -212,7 +214,6 @@
 -r:"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\Facades\System.Diagnostics.Tracing.dll"
 -r:"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\Facades\System.Reflection.Primitives.dll"
 "C:\CTPSDK - Copy\SC-Plugin-FedEx\Plugin.Xcentium.Shipping.Fedex\ConfigureSitecore.cs"
-"C:\CTPSDK - Copy\SC-Plugin-FedEx\Plugin.Xcentium.Shipping.Fedex\FedExClientPolicy.cs"
 "C:\CTPSDK - Copy\SC-Plugin-FedEx\Plugin.Xcentium.Shipping.Fedex\XcentiumPhysicalFulfillmentPolicy.cs"
 "C:\CTPSDK - Copy\SC-Plugin-FedEx\Plugin.Xcentium.Shipping.Fedex\Fedex\FedexFulfillmentMethod.cs"
 "C:\CTPSDK - Copy\SC-Plugin-FedEx\Plugin.Xcentium.Shipping.Fedex\Fedex\FedExInternational.cs"
@@ -224,5 +225,6 @@
 "C:\CTPSDK - Copy\SC-Plugin-FedEx\Plugin.Xcentium.Shipping.Fedex\Pipelines\Blocks\ChangeFulfillmentOptionsBlock.cs"
 "C:\CTPSDK - Copy\SC-Plugin-FedEx\Plugin.Xcentium.Shipping.Fedex\Pipelines\Blocks\UpdateCartFulfillmentChargeBlock.cs"
 "C:\CTPSDK - Copy\SC-Plugin-FedEx\Plugin.Xcentium.Shipping.Fedex\Pipelines\Blocks\UpdateCartLinesFulfillmentChargeBlock.cs"
+"C:\CTPSDK - Copy\SC-Plugin-FedEx\Plugin.Xcentium.Shipping.Fedex\Policies\FedExClientPolicy.cs"
 "C:\CTPSDK - Copy\SC-Plugin-FedEx\Plugin.Xcentium.Shipping.Fedex\Properties\AssemblyInfo.cs"
 "C:\CTPSDK - Copy\SC-Plugin-FedEx\Plugin.Xcentium.Shipping.Fedex\Properties\Settings.Designer.cs"
