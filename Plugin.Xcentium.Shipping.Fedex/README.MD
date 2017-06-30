@@ -68,7 +68,7 @@ How to Install
 
 6. Install the Fedex Shipping Option Pkg-1.0.zip in Sitecore when installed, select Fedex Delivery as your shipping option.
 
-7. You are ready to start using it. When you select a certain 
+7. You are ready to start using it. 
 
 Note:
 =====

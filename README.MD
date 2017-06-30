@@ -23,10 +23,10 @@ How to Install
 1. Copy it to your Sitecore Commerce Engine Solution and add it as a project 
 
 2. Add it as a dependency to your Sitecore Commerce Engine Project.Json file by adding the line below
-    "Plugin.Xcentium.Fulfillment": "1.0.2301"
+    "Plugin.Xcentium.Fulfillment.Fedex": "1.0.2301"
 
 3. Add it as a dependency to your Adventure works or Habitat or Custom Site plugin' project.json file by adding the line below
-    "Plugin.Xcentium.Fulfillment": "1.0.2301"
+    "Plugin.Xcentium.Fulfillment.Fedex": "1.0.2301"
 
 4. Add the settings below with your Fedex API key to your Sitecore Commerce Engine's environment json files
 
@@ -68,7 +68,7 @@ How to Install
 
 6. Install the Fedex Shipping Option Pkg-1.0.zip in Sitecore when installed, select Fedex Delivery as your shipping option.
 
-7. You are ready to start using it. When you select a certain 
+7. You are ready to start using it. 
 
 Note:
 =====
