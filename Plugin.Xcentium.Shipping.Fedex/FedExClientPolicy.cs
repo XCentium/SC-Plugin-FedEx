@@ -36,11 +36,6 @@ namespace Plugin.Xcentium.Shipping.Fedex
 
             CompensationMultipier = 1m;
 
-            WeightFieldName = "Weight";
-            LengthFieldName = "Length";
-            WidthFieldName = "Width";
-            HeightFieldName = "Height";
-
         }
 
         /// <summary>
@@ -129,26 +124,6 @@ namespace Plugin.Xcentium.Shipping.Fedex
         /// This multiplies the cart total with an inconvenience factor incase postage needs compensation paid out.
         /// </summary>
         public decimal CompensationMultipier { get; set; }
-
-        /// <summary>
-        /// Weight field name in Sitecore
-        /// </summary>
-        public string WeightFieldName { get; set; }
-
-        /// <summary>
-        /// Lenght field name in Sitecore
-        /// </summary>
-        public string LengthFieldName { get; set; }
-
-        /// <summary>
-        /// Width field name in Sitecore
-        /// </summary>
-        public string WidthFieldName { get; set; }
-
-        /// <summary>
-        /// Height field name in Sitecore
-        /// </summary>
-        public string HeightFieldName { get; set; }
 
     }
 
