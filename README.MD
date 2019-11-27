@@ -1,5 +1,5 @@
 ﻿
-Sitecore Commerce Engine Fedex plugin (Sitecore Commerce 9 Initial Release)
+Sitecore Commerce Engine Fedex plugin (Sitecore Experience Commerce 9.1)
 ======================================
 
 This plugin allows the user to integrate Fedex as a Fulfillment Method for shipping. 
@@ -31,7 +31,7 @@ How to Install
 ```
  {
   "$type": "Sitecore.Commerce.Core.PolicySet, Sitecore.Commerce.Core",
-  "Id": "Entity-PolicySet-BraintreePolicySet",
+  "Id": "Entity-PolicySet-FedexPolicySet",
   "Version": 1,
   "IsPersisted": false,
   "Name": "FedexPolicySet",
@@ -68,6 +68,18 @@ How to Install
   }
 }
  ,
+```
+
+Inside your corresponding json files for PlugIn.Habitat.CommerceAuthoring-1.0.0.json, PlugIn.Habitat.CommerceMinions-1.0.0.json and PlugIn.Habitat.CommerceShops-1.0.0.json
+ you will need to add the line below. I added mine after braintree entry
+
+ ```
+       {
+        "$type": "Sitecore.Commerce.Core.PolicySetPolicy, Sitecore.Commerce.Core",
+        "PolicySetId": "Entity-PolicySet-FedexPolicySet"
+      },
+
+
 ```
 
 5. Add the required ship from address and default weight and dimension of a catalog product. The default values will be used when there is no dimension and weight specified in Sitecore for the product item(see notes below).

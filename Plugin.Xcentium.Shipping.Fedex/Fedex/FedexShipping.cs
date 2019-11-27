@@ -86,7 +86,7 @@ namespace Plugin.Xcentium.Shipping.Fedex.Fedex
                     var productArgument = ProductArgument.FromItemId(cartLineComponent.ItemId);
                     if (!productArgument.IsValid()) continue;
 
-                    var sellableItem = getSellableItemPipeline.Run(productArgument, commerceContext.GetPipelineContextOptions()).Result;
+                    var sellableItem = getSellableItemPipeline.Run(productArgument, commerceContext.PipelineContextOptions).Result;
 
                     if (sellableItem != null && sellableItem.HasComponent<ItemSpecificationsComponent>())
                     {
